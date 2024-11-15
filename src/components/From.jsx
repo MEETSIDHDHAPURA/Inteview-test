@@ -18,7 +18,7 @@ const Form = () => {
       ...prevFields,
       {
         id: uuidv4(),
-        value: "", // Add value property for new item
+        value: "",
         children: [
           { id: uuidv4(), type: "searchField", value: "", children: [] },
         ],
@@ -102,7 +102,7 @@ const Form = () => {
     const updateFieldValues = (fields) => {
       return fields.map((field) => {
         if (field.id === id) {
-          return { ...field, value }; // Update field value
+          return { ...field, value }; 
         }
         if (field.children.length) {
           return {

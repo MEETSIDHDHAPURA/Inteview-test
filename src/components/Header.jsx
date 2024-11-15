@@ -16,7 +16,7 @@ const Header = () => {
   useEffect(() => {
     const storedData = localStorage.getItem("formData");
     if (storedData) {
-      setData(JSON.parse(storedData)); // Parse the string into an array
+      setData(JSON.parse(storedData));
     }
   }, []);
 
