@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Box, Button, TextField } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 
-const Form = () => {
+const AddItem = () => {
   const [fields, setFields] = useState([
     {
       id: uuidv4(),
@@ -285,4 +285,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default AddItem;

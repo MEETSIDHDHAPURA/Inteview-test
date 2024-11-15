@@ -1,12 +1,12 @@
 import { Box } from "@mui/material";
-import From from "./components/From";
 import Header from "./components/Header";
+import AddItem from "./components/AddItem";
 
 const App = () => {
   return (
     <Box>
       <Header />
-      <From />
+      <AddItem />
     </Box>
   );
 };
