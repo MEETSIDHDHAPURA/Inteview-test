@@ -1,26 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Box } from "@mui/material";
-import { IoMenu } from "react-icons/io5";
-import { IoMdClose } from "react-icons/io";
+import React, { useState } from "react";
+import { Box, Button } from "@mui/material";
 
 const Header = () => {
   const [menu, setMenu] = useState(false);
-  const [hoveredItem, setHoveredItem] = useState(null);
-  const [hoveredSubItem, setHoveredSubItem] = useState(null);
-  const [data, setData] = useState([]);
+  const [blog, setBlog] = useState(false);
+  const [about, setAbout] = useState(false);
+  const [contact, setContact] = useState(false);
+  const [career, setCareer] = useState(false);
 
   const handleClick = () => {
     setMenu(!menu);
   };
-
-  useEffect(() => {
-    const storedData = localStorage.getItem("formData");
-    if (storedData) {
-      setData(JSON.parse(storedData));
-    }
-  }, [localStorage]);
-
-  const renderData = data?.length > 0 ? data[0]?.children : [];
 
   return (
     <>
@@ -28,9 +18,9 @@ const Header = () => {
         sx={{
           display: "flex",
           justifyContent: "space-between",
+          padding: 2,
           px: { xs: 2, md: 6 },
-          borderBottom: "1px solid gray",
-          background: "#C9E6F0",
+          background: "lightblue",
         }}
       >
         <Box
@@ -42,127 +32,144 @@ const Header = () => {
           }}
         >
           <img
-            alt="Logo"
+            alt=""
             src="https://cxl-web-prod-uploads.s3.amazonaws.com/public/filestore-uploads/27f0c3e906051948cf6a650b42b0227a5b69db06.png"
             style={{ height: "100%", width: "100%", objectFit: "contain" }}
           />
         </Box>
-
-        <Box sx={{ display: "flex", gap: 2 }}>
-          {renderData.map((item) =>
-            item?.children?.map(
-              (child) =>
-                child?.children?.length > 0 && (
+        <Box
+          sx={{
+            display: { xs: "none", md: "flex" },
+            alignItems: "center",
+            gap: 5,
+          }}
+        >
+          <Box>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 5 }}>
+              <Box
+                sx={{
+                  position: "relative",
+                  "&:hover > .dropdown": {
+                    visibility: "visible",
+                    opacity: 1,
+                  },
+                }}
+                onMouseEnter={() => setAbout(true)}
+                onMouseLeave={() => setAbout(false)}
+              >
+                <p>About</p>
+                {about && (
                   <Box
-                    key={child?.id}
                     sx={{
-                      display: { xs: "none", md: "flex" },
-                      alignItems: "center",
-                      position: "relative",
-                    }}
-                    onMouseEnter={() => setHoveredItem(child?.id)}
-                    onMouseLeave={() => {
-                      setHoveredItem(null);
-                      setHoveredSubItem(null);
+                      position: "absolute",
+                      zIndex: 10,
+                      top: "100%",
+                      left: 0,
+                      background: "purple",
+                      borderRadius: "12px",
+                      opacity: about ? 1 : 0,
+                      transition: "opacity 0.3s ease",
                     }}
                   >
-                    <Box>
-                      <Box
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          color: "black",
-                        }}
-                      >
-                        <p>{child?.value}</p>
-                      </Box>
-                    </Box>
-
-                    {hoveredItem === child?.id && (
-                      <Box
-                        sx={{
-                          position: "absolute",
-                          top: "100%",
-                          left: "0",
-                          background: "white",
-                          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                          padding: 2,
-                          borderRadius: "8px",
-                          zIndex: 10,
-                        }}
-                      >
-                        {child?.children?.map(
-                          (subChild) =>
-                            subChild?.children?.length > 0 && (
-                              <Box
-                                key={subChild?.id}
-                                sx={{ position: "relative", padding: 1 }}
-                                onMouseEnter={() =>
-                                  setHoveredSubItem(subChild.id)
-                                }
-                                onMouseLeave={() => setHoveredSubItem(null)}
-                              >
-                                <p>{subChild?.value}</p>
-
-                                {hoveredSubItem === subChild.id && (
-                                  <Box
-                                    sx={{
-                                      position: "absolute",
-                                      top: "0",
-                                      left: "100%",
-                                      background: "#f0f8ff",
-                                      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                                      padding: 2,
-                                      borderRadius: "8px",
-                                      zIndex: 20,
-                                    }}
-                                  >
-                                    <p>
-                                      {subChild?.children?.length
-                                        ? subChild.children[0]?.value
-                                        : "No Data"}
-                                    </p>
-                                  </Box>
-                                )}
-                              </Box>
-                            )
-                        )}
-                      </Box>
-                    )}
+                    <ul style={{ margin: 0, padding: "30px", color: "white" }}>
+                      <li>About Item 1</li>
+                      <li>About Item 2</li>
+                      <li>About Item 3</li>
+                    </ul>
                   </Box>
-                )
-            )
-          )}
+                )}
+              </Box>
+              <Box
+                sx={{
+                  position: "relative",
+                  "&:hover > .dropdown": {
+                    visibility: "visible",
+                    opacity: 1,
+                  },
+                }}
+                onMouseEnter={() => setContact(true)}
+                onMouseLeave={() => setContact(false)}
+              >
+                <p>Contact</p>
+                {contact && (
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      zIndex: 10,
+                      top: "100%",
+                      left: 0,
+                      background: "#9694FF",
+                      borderRadius: "12px",
+                      opacity: contact ? 1 : 0,
+                      transition: "opacity 0.3s ease",
+                    }}
+                  >
+                    <ul style={{ margin: 0, padding: "30px", color: "white" }}>
+                      <li>Contact Item 1</li>
+                      <li>Contact Item 2</li>
+                      <li>Contact Item 3</li>
+                    </ul>
+                  </Box>
+                )}
+              </Box>
+              <Box
+                sx={{
+                  position: "relative",
+                  "&:hover > .dropdown": {
+                    visibility: "visible",
+                    opacity: 1,
+                  },
+                }}
+                onMouseEnter={() => setCareer(true)}
+                onMouseLeave={() => setCareer(false)}
+              >
+                <p>Career</p>
+                {career && (
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      zIndex: 10,
+                      top: "100%",
+                      left: 0,
+                      background: "#EBEAFF",
+                      borderRadius: "12px",
+                      opacity: career ? 1 : 0,
+                      transition: "opacity 0.3s ease",
+                    }}
+                  >
+                    <ul style={{ margin: 0, padding: "30px", }}>
+                      <li>Career Item 1</li>
+                      <li>Career Item 2</li>
+                      <li>Career Item 3</li>
+                    </ul>
+                  </Box>
+                )}
+              </Box>
+            </Box>
+          </Box>
+          <Box>
+            <Button variant="contained">get</Button>
+          </Box>
         </Box>
-
         <Box
           onClick={handleClick}
           sx={{ display: { xs: "flex", md: "none" }, alignItems: "center" }}
         >
-          {menu ? (
-            <p>
-              <IoMdClose />
-            </p>
-          ) : (
-            <p>
-              <IoMenu />
-            </p>
-          )}
+          {menu ? <p>Close</p> : <p>Icon</p>}
         </Box>
       </Box>
 
-      {menu && (
+      {menu ? (
         <Box
           sx={{
             display: { md: "none" },
             position: "absolute",
-            top: "15%",
+            top: "10%",
             width: "100%",
             height: "100%",
-            zIndex:1
           }}
         >
-          <Box sx={{ background: "white", p: 2 }}>
+          <Box sx={{ background: "red", p: 2 }}>
             <ul
               style={{
                 display: "flex",
@@ -178,7 +185,7 @@ const Header = () => {
             </ul>
           </Box>
         </Box>
-      )}
+      ) : null}
     </>
   );
 };
