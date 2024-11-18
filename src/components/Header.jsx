@@ -18,7 +18,7 @@ const Header = () => {
     if (storedData) {
       setData(JSON.parse(storedData));
     }
-  }, []);
+  }, [localStorage]);
 
   const renderData = data?.length > 0 ? data[0]?.children : [];
 
@@ -71,7 +71,7 @@ const Header = () => {
                         sx={{
                           display: "flex",
                           alignItems: "center",
-                          color: "darkblue",
+                          color: "black",
                         }}
                       >
                         <p>{child?.value}</p>
@@ -156,7 +156,7 @@ const Header = () => {
           sx={{
             display: { md: "none" },
             position: "absolute",
-            top: "10%",
+            top: "15%",
             width: "100%",
             height: "100%",
             zIndex:1

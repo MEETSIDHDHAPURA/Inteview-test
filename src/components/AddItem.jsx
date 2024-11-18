@@ -245,7 +245,6 @@ const AddItem = () => {
     localStorage.setItem("formData", JSON.stringify(fields));
   };
 
-  console.log("field", fields);
 
   return (
     <>
